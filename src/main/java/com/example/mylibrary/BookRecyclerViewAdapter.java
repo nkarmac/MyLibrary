@@ -27,9 +27,11 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
 
     private ArrayList<Book> books = new ArrayList<>();
     private Context mContext;
+    private String parentActivity;
 
-    public BookRecyclerViewAdapter(Context mContext) {
+    public BookRecyclerViewAdapter(Context mContext, String parentActivity) {
         this.mContext = mContext;
+        this.parentActivity = parentActivity;
     }
 
     public void setBooks(ArrayList<Book> books) {
@@ -65,10 +67,76 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         holder.txtAuthor.setText(books.get(position).getAuthor());
         holder.txtDescription.setText(books.get(position).getShortDesc());
 
-        if (books.get(position).isExpanded())   {
+        if (books.get(position).isExpanded()) {
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.VISIBLE);
             holder.downArrow.setVisibility(View.GONE);
+
+            switch (parentActivity) {
+                case "allBooks":
+                    holder.btnDelete.setVisibility(View.GONE);
+                    break;
+                case "finishedBooks":
+                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (Utils.getInstance().removeFromFinished(books.get(position))) {
+                                Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    break;
+                case "wishList":
+                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (Utils.getInstance().removeFromWishlist(books.get(position))) {
+                                Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    break;
+                case "currentBooks":
+                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (Utils.getInstance().removeFromCurrentBooks(books.get(position))) {
+                                Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    break;
+                case "favoriteBooks":
+                    holder.btnDelete.setVisibility(View.VISIBLE);
+                    holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            if (Utils.getInstance().removeFromFavoriteBooks(books.get(position))) {
+                                Toast.makeText(mContext, "Book Removed", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    break;
+            }
+
+
+
         }   else    {
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.GONE);
@@ -89,6 +157,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
         private ImageView downArrow, upArrow;
         private RelativeLayout expandedRelLayout;
         private TextView txtAuthor, txtDescription;
+        private TextView btnDelete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.parent);
@@ -100,6 +169,8 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
             expandedRelLayout = itemView.findViewById(R.id.expandedRelLayout);
             txtAuthor = itemView.findViewById(R.id.txtAuthor);
             txtDescription = itemView.findViewById(R.id.txtShortDesc);
+
+            btnDelete = itemView.findViewById(R.id.btnDelete);
 
             downArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
