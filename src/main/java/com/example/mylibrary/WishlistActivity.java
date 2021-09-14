@@ -15,7 +15,7 @@ public class WishlistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wishlist);
 
         RecyclerView recyclerView = findViewById(R.id.booksRecView);
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this, "wishList");
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

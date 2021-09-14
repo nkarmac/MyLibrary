@@ -16,7 +16,7 @@ public class FinishedBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finished_book);
 
         RecyclerView recyclerView = findViewById(R.id.bookRecView);
-        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this);
+        BookRecyclerViewAdapter adapter = new BookRecyclerViewAdapter(this, "finishedBooks");
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
