@@ -3,6 +3,7 @@ package com.example.mylibrary;
 import static com.example.mylibrary.BookActivity.BOOK_ID_KEY;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionManager;
@@ -81,12 +83,26 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                     holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (Utils.getInstance().removeFromFinished(books.get(position))) {
-                                Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
-                                notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
-                            }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("Are you sure you want to delete " + books.get(position).getName() + "?");
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (Utils.getInstance().removeFromFinished(books.get(position))) {
+                                        Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    } else {
+                                        Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // dismiss dialogue
+                                }
+                            });
+                            builder.create().show();
                         }
                     });
                     break;
@@ -95,12 +111,26 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                     holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (Utils.getInstance().removeFromWishlist(books.get(position))) {
-                                Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
-                                notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
-                            }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("Are you sure you want to delete " + books.get(position).getName() + "?");
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (Utils.getInstance().removeFromWishlist(books.get(position))) {
+                                        Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    } else {
+                                        Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // dismiss dialogue
+                                }
+                            });
+                            builder.create().show();
                         }
                     });
                     break;
@@ -109,12 +139,26 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                     holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (Utils.getInstance().removeFromCurrentBooks(books.get(position))) {
-                                Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
-                                notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
-                            }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("Are you sure you want to delete " + books.get(position).getName() + "?");
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (Utils.getInstance().removeFromCurrentBooks(books.get(position))) {
+                                        Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    } else {
+                                        Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // dismiss dialogue
+                                }
+                            });
+                            builder.create().show();
                         }
                     });
                     break;
@@ -123,21 +167,31 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                     holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            if (Utils.getInstance().removeFromFavoriteBooks(books.get(position))) {
-                                Toast.makeText(mContext, "Book Removed", Toast.LENGTH_SHORT).show();
-                                notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
-                            }
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("Are you sure you want to delete " + books.get(position).getName() + "?");
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (Utils.getInstance().removeFromFavoriteBooks(books.get(position))) {
+                                        Toast.makeText(mContext, "Book Removed", Toast.LENGTH_SHORT).show();
+                                        notifyDataSetChanged();
+                                    } else {
+                                        Toast.makeText(mContext, "Something wrong happened, Please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // dismiss dialogue
+                                }
+                            });
+                            builder.create().show();
                         }
                     });
                     break;
             }
-
-
-
-        }   else    {
+        } else    {
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.expandedRelLayout.setVisibility(View.GONE);
             holder.downArrow.setVisibility(View.VISIBLE);
