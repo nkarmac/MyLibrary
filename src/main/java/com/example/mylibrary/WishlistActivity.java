@@ -23,7 +23,7 @@ public class WishlistActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setBooks(Utils.getWishList());
+        adapter.setBooks(Utils.getInstance(this).getWishList());
     }
 
     @Override

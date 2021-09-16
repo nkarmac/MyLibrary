@@ -23,7 +23,7 @@ public class CurrentBooksActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setBooks(Utils.getCurrentBooks());
+        adapter.setBooks(Utils.getInstance(this).getCurrentBooks());
     }
 
     @Override

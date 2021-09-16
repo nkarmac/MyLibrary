@@ -88,7 +88,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (Utils.getInstance().removeFromFinished(books.get(position))) {
+                                    if (Utils.getInstance(mContext).removeFromFinished(books.get(position))) {
                                         Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
                                     } else {
@@ -116,7 +116,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (Utils.getInstance().removeFromWishlist(books.get(position))) {
+                                    if (Utils.getInstance(mContext).removeFromWishlist(books.get(position))) {
                                         Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
                                     } else {
@@ -144,7 +144,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (Utils.getInstance().removeFromCurrentBooks(books.get(position))) {
+                                    if (Utils.getInstance(mContext).removeFromCurrentBooks(books.get(position))) {
                                         Toast.makeText(mContext, "Book removed", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
                                     } else {
@@ -172,7 +172,7 @@ public class BookRecyclerViewAdapter extends RecyclerView.Adapter<BookRecyclerVi
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (Utils.getInstance().removeFromFavoriteBooks(books.get(position))) {
+                                    if (Utils.getInstance(mContext).removeFromFavoriteBooks(books.get(position))) {
                                         Toast.makeText(mContext, "Book Removed", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
                                     } else {

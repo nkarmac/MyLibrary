@@ -24,7 +24,7 @@ public class FinishedBookActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setBooks(Utils.getFinishedBooks());
+        adapter.setBooks(Utils.getInstance(this).getFinishedBooks());
     }
 
     @Override
